@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Backend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Testando Backend</h1>
+
+    <!-- Formulário para cadastrar usuário -->
+    <div class="form-container">
+        <h2>Cadastrar Usuário</h2>
+        <input type="text" id="name" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <button onclick="createUser()">Cadastrar</button>
+        <p id="registerMessage" class="message"></p>
+    </div>
+
+    <!-- Formulário para consultar usuário -->
+    <div class="form-container">
+        <h2>Consultar Usuário</h2>
+        <input type="email" id="searchEmail" placeholder="Email" required>
+        <button onclick="getUser()">Consultar</button>
+        <p id="searchMessage" class="message"></p>
+        <div id="userDetails"></div>
+    </div>
+
+    <script>
+        const backendURL = "http://127.0.0.1:8001"; // URL do seu servidor FastAPI
+
+        // Função para cadastrar usuário
+        async function createUser() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch(`${backendURL}/new_user`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password,
+                })
+            });
+
+            const result = await response.json();
+            const messageElement = document.getElementById('registerMessage');
+            if (response.ok) {
+                messageElement.style.color = 'green';
+                messageElement.textContent = `Usuário ${result.name} cadastrado com sucesso!`;
+            } else {
+                messageElement.style.color = 'red';
+                messageElement.textContent = `Erro: ${result.error}`;
+            }
+        }
+
+        // Função para consultar usuário
+        async function getUser() {
+            const email = document.getElementById('searchEmail').value;
+
+            const response = await fetch(`${backendURL}/new_user/${email}`);
+            console.log(email)
+            const result = await response.json();
+            const messageElement = document.getElementById('searchMessage');
+            const userDetails = document.getElementById('userDetails');
+
+            if (response.ok) {
+                messageElement.style.color = 'green';
+                messageElement.textContent = 'Usuário encontrado:';
+                userDetails.innerHTML = `
+                    <p>ID: ${result.id}</p>
+                    <p>Nome: ${result.name}</p>
+                    <p>Email: ${result.email}</p>
+                `;
+            } else {
+                messageElement.style.color = 'red';
+                messageElement.textContent = `Erro: ${result.detail}`;
+                userDetails.innerHTML = '';
+            }
+        }
+    </script>
+
+</body>
+</html>

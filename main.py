@@ -6,8 +6,17 @@ import cadastro
 from cadastro import get_db
 from databases import engine
 from models import Base
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Ou substitua "*" por uma lista de URLs específicas permitidas
+    allow_credentials=True,
+    allow_methods=["*"],  # Permitir todos os métodos HTTP
+    allow_headers=["*"],  # Permitir todos os cabeçalhos
+)
 
 @app.get('/')
 def test():
