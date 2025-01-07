@@ -24,6 +24,7 @@ botao.addEventListener('click', async function login(event) {
             const data = await response.json();
             responseElement.textContent = data.message || 'Login Bem Sucedido!';
             responseElement.className = 'mt-4 text-sm text-green-500'
+            
         } else {
             const errorData = await response.json();
             responseElement.textContent = errorData.message || 'Erro no login.';
