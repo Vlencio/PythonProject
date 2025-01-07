@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+    <div class="flex items-center justify-center min-h-screen bg-gray-600">
+        <form class="w-full max-w-sm bg-white p-6 rounded shadow-md">
+            <h2>Cadastro</h2>
+            <label>Nome</label>
+            <input type="text" class="emailInput w-full p-2 border border-gray-300 rounded mb-4" id="nomeInput" required>
+
+            <label>Email</label>
+            <input type="text" class="emailInput w-full p-2 border border-gray-300 rounded mb-4" id="emailInput" required>
+
+            <label>Senha</label>
+            <input type="text" class="emailInput w-full p-2 border border-gray-300 rounded mb-4" id="senhaInput" required>
+
+            <button type="click" class="w-full py-2 bg-blue-500 rounded text-white hover:bg-blue-600" id="botaoCadastrar">Cadastrar</button>
+
+            <p id="responseElement" class="text-2x1 block mb-2 text-sm font-medium text-green-300"></p>
+        </form>
+    </div>
+
+
+
+    <script src="../js/scriptCadastro.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
