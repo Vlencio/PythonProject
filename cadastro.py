@@ -28,3 +28,11 @@ def create_user(name, email, password,db: Session):
 
 def search(email: str, db: Session):
     return db.query(User).filter(User.email == email).first()
+
+def login(email: str, password: str, db: Session):
+    loginEmail = db.query(User).filter(User.email == email).first()
+    passwordEmail = db.query(User).filter(User.password == password).first()
+
+    if loginEmail and passwordEmail:
+        return True
+    return None
