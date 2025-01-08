@@ -28,7 +28,9 @@ botao.addEventListener('click', async function cadastrar(event) {
         } else {
             const errorData = await response.json();
             responseElement.textContent = errorData.message || 'Erro no cadastro.'
-        }
+        } 
+    } catch (error) {
+        console.log(error)
     }
     
 })
