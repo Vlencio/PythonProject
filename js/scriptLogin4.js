@@ -1,4 +1,4 @@
-console.log('Já estamos no terceiro desafio, quem diria, agora, tente achar o link que irá te ajudar a resolver esta etapa.')
+console.log('Quarto desafio, estamos na reta final, vamos deixar de lado a brincadeira de criança. Boa sorte procurando a proxima pista.')
 const forms = document.getElementById('formulario');
 forms.addEventListener('submit', async function login(event) {
     event.preventDefault();
